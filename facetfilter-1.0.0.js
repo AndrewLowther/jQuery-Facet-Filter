@@ -5,15 +5,16 @@
 		 * Default plugin settings
 		 */
 		var settings = {
-			"version": "1.0",
-			"filters": null,
-			"anti_filters": null,
-			"active_filters": {},
-			"ajax_url": null,
-			"url_options": {},
-			"onsuccess": null,
-			"oncomplete": null,
-			"onerror": null
+			"version": "1.0", // Current plugin version
+			"filters": null, // Selection of filters that can be applied
+			"anti_filters": null, // Deselection filters
+			"active_filters": {}, // Current object of active filters
+			"ajax_url": null, // Ajax request URL
+			"url_options": {}, // Extra options to pass to the URL object (ex. is_ajax: 1)
+			"onsuccess": null, // Success callback
+			"oncomplete": null, // Complete callback
+			"onerror": null, // Error callback
+			"callback": null // Generic callback
 		};
 		
 		// Set the facet as this
@@ -26,7 +27,7 @@
 			element = element; // The actual dom reference
 		
 		// Set up the plugin options
-		facets.init = function() {
+		var init = function() {
 			facets.settings = $.extend({}, settings, options);
 			
 			$element.on("change click", facets.settings.filters, facets.select);
@@ -44,19 +45,19 @@
 					type = type.toUpperCase();
 				}
 				
-				if( facets.settings.onsuccess === void 0 ) {
+				if( facets.settings.onsuccess === null ) {
 					var onsuccess = function( response, textStatus, jqXHR ) {};
 				} else {
 					var onsuccess = facets.settings.onsuccess;
 				}
 				
-				if( facets.settings.oncomplete === void 0 ) {
+				if( facets.settings.oncomplete === null ) {
 					var oncomplete = function( jqXHR, textStatus ) {};
 				} else {
 					var oncomplete = facets.settings.oncomplete;
 				}
 				
-				if( facets.settings.onerror === void 0 ) {
+				if( facets.settings.onerror === null ) {
 					var onerror = function( jqXHR, textStatus, errorThrown ) {};
 				} else {
 					var onerror = facets.settings.onerror;
@@ -122,6 +123,10 @@
 			var facet_name = $(this).parent().parent().attr("id");
 			facets.addFacet( facet_name, $(this).val() );
 			
+			if( facets.settings.callback !== null ) {
+				facets.settings.callback.apply(facets, ["addFacet"]);
+			}
+			
 			facets.request();
 		};
 		
@@ -130,10 +135,15 @@
 			var facet_name = $(this).attr("name").replace(/\[(.*)\]/, "");
 			facets.removeFacet( facet_name, $(this).val() );
 			
+			if( facets.settings.callback !== null ) {
+				facets.settings.callback.apply(facets, ["removeFacet"]);
+			}
+			
 			facets.request();
 		}
 		
-		facets.init();
+		// Call the init private method
+		init();
 	}
 	
 	$.fn.facetfilter = function( options ) {
