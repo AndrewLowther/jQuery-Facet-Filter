@@ -84,7 +84,7 @@
 		// Add a facet to the filters
 		facets.addFacet = function( facet, value ) {
 			if( typeof facets.settings.active_filters[facet] === 'undefined' ) {
-				if( value === void 0 ) {
+				if( value === null ) {
 					value = 1;
 				}
 				
@@ -95,7 +95,7 @@
 		
 		// Remove facets from the filters
 		facets.removeFacet = function( facet, value ) {
-			if( value !== void 0 ) {
+			if( value !== null ) {
 				if( typeof facets.settings.active_filters[facet][value] !== 'undefined' ) {
 					delete facets.settings.active_filters[facet][value];
 				}
@@ -140,6 +140,16 @@
 			}
 			
 			facets.request();
+		}
+		
+		// URI Encode active facets
+		facets.serialize = function( obj, prefix ) {
+			var str = [];
+			for( var p in obj ) {
+				var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
+				str.push(typeof v == "object" ? facets.serialize(v, k) : encodeURIComponent(k) + "=" + encodeURIComponent(v));
+			}
+			return str.join("&");
 		}
 		
 		// Call the init private method
