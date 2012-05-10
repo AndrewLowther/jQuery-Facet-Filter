@@ -145,11 +145,18 @@
 		// URI Encode active facets
 		facets.serialize = function( obj, prefix ) {
 			var str = [];
+			if( obj === null ) {
+				obj = facets.settings.active_filters;
+			}
 			for( var p in obj ) {
 				var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
 				str.push(typeof v == "object" ? facets.serialize(v, k) : encodeURIComponent(k) + "=" + encodeURIComponent(v));
 			}
 			return str.join("&");
+		}
+		
+		facets.activeFilters = function() {
+			return facets.settings.active_filters;
 		}
 		
 		// Call the init private method
