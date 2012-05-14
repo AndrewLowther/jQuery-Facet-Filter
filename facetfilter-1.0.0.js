@@ -5,7 +5,7 @@
 		 * Default plugin settings
 		 */
 		var settings = {
-			"version": "1.0", // Current plugin version
+			"version": "1.0.0", // Current plugin version
 			"filters": null, // Selection of filters that can be applied
 			"anti_filters": null, // Deselection filters
 			"active_filters": {}, // Current object of active filters
@@ -120,8 +120,10 @@
 		// Select a facet
 		facets.select = function( e ) {
 			// This is currently a bit of a hack for the projects I'm currently working on, feel free to change/fix this as needed
-			var facet_name = $(this).parent().parent().attr("id");
-			facets.addFacet( facet_name, $(this).val() );
+			if( parseInt( $(this).val() ) ) {
+				var facet_name = $(this).parent().parent().attr("id");
+				facets.addFacet( facet_name, $(this).val() );
+			}
 			
 			if( facets.settings.callback !== null ) {
 				facets.settings.callback.apply(facets, ["addFacet"]);
