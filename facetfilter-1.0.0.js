@@ -147,7 +147,7 @@
 		// URI Encode active facets
 		facets.serialize = function( obj, prefix ) {
 			var str = [];
-			if( obj === null ) {
+			if( obj === undefined ) {
 				obj = facets.settings.active_filters;
 			}
 			for( var p in obj ) {
