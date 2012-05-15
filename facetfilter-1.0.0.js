@@ -14,7 +14,8 @@
 			"onsuccess": null, // Success callback
 			"oncomplete": null, // Complete callback
 			"onerror": null, // Error callback
-			"callback": null // Generic callback
+			"callback": null, // Generic callback
+			"type": "html" // Specify the data type returned
 		};
 		
 		// Set the facet as this
@@ -73,7 +74,7 @@
 					url: facets.settings.ajax_url,
 					type: type,
 					data: facet_data,
-					dataType: "html",
+					dataType: facets.settings.type,
 					success: onsuccess,
 					complete: oncomplete,
 					error: onerror
