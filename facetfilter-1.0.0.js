@@ -31,7 +31,7 @@
 		var init = function() {
 			facets.settings = $.extend({}, settings, options);
 			
-			$element.on("change click", facets.settings.filters, facets.select);
+			$element.on("change", facets.settings.filters, facets.select);
 			$element.on("click", facets.settings.anti_filters, facets.deselect)
 		};
 		
