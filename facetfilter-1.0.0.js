@@ -202,7 +202,7 @@
 				}
 			}
 
-			if( facets.settings.single_filters.indexOf(filter) ) {
+			if( facets.settings.single_filters.indexOf(filter) !== -1 ) {
 				return true;
 			} else {
 				return false;
