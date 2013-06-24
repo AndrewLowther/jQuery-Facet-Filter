@@ -12,6 +12,7 @@
 			"anti_filters": null, // Deselection filters
 			"active_filters": {}, // Current object of active filters
 			"single_filters": [], // Define a list of filters that are single use
+			"exclude_params": [],
 			"ajax_url": null, // Ajax request URL
 			"url_options": {}, // Extra options to pass to the URL object (ex. is_ajax: 1)
 			"onsuccess": null, // Success callback
@@ -36,6 +37,13 @@
 			
 			$element.on("change", facets.settings.filters, facets.select);
 			$element.on("click", facets.settings.anti_filters, facets.deselect)
+
+			console.log(facets.settings.exclude_params);
+			for(key in facets.settings.exclude_params) {
+				val = facets.settings.exclude_params[key];
+				facets.addFacet(val.name, val.val);
+
+			}
 		};
 		
 		// Set up a request
