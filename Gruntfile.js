@@ -37,6 +37,11 @@ module.exports = function (grunt) {
       },
       files: ['Gruntfile.js', '<%= pkg.scripts.main %>']
     },
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
+    },
     watch: {
       files: ['<%= jshint.files %>'],
       tasks: ['uglify', 'jshint']
@@ -44,4 +49,6 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('default', ['uglify', 'jshint']);
+
+  grunt.registerTask('test', ['karma']);
 };
