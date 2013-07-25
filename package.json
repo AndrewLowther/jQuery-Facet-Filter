@@ -1,0 +1,33 @@
+{
+	"name": "FacetFilter",
+	"version": "1.0.2",
+	"description": "A javascript facet filter library",
+	"author": "Andrew Lowther <andrew.lowther@mademedia.co.uk>",
+	"contributors": [{
+		"name": "Andrew Lowther",
+		"email": "andrew.lowther@mademedia.co.uk"
+	},
+	{
+		"name": "Adam Cross",
+		"email": "adam.cross@mademedia.co.uk"
+	}],
+	"devDependencies": {
+		"grunt": "~0.4.0",
+		"grunt-contrib-jshint": "~0.1.1",
+		"grunt-contrib-less": "~0.5.0",
+		"grunt-contrib-watch": "~0.2.0",
+		"grunt-contrib-uglify": "~0.1.2",
+		"grunt-shell": "~0.2.1",
+		"grunt-karma": "~0.4.0",
+		"matchdep": "~0.1.2",
+		"grunt-notify": "~0.2.4"
+	},
+	"scripts": {
+		"main": "facetfilter.js",
+		"minified": "facetfilter.min.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:AndrewLowther/jQuery-Facet-Filter.git"
+	}
+}
