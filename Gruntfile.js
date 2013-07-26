@@ -25,15 +25,7 @@ module.exports = function (grunt) {
         jquery: true,
         smarttabs: true,
         undef: true,
-        unused: false,
-        globals: {
-          TweenLite: false,
-          Power3: false,
-          Modernizr: false,
-          YT: false,
-          Util: true,
-          App: true
-        }
+        unused: false
       },
       files: ['Gruntfile.js', '<%= pkg.scripts.main %>']
     },
