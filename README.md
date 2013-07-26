@@ -20,6 +20,10 @@ To use the facet filter, assign it to an element, we currently require an ajax U
 
 ## Version History
 
+# 1.0.3
+
+* Fixed facet filter removal, so facets can be removed without values
+
 # 1.0.2
 
 * Enabled single filter mode

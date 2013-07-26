@@ -1,6 +1,6 @@
 {
   "name": "facetfilter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "facetfilter.min.js",
   "dependencies": {
     "jquery": "1.10.2"
