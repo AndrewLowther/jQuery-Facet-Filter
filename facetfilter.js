@@ -8,7 +8,7 @@
      * Default plugin settings
      */
     settings = {
-      'version': '1.0.2', // Current plugin version
+      'version': '1.0.3', // Current plugin version
       'filters': null, // Selection of filters that can be applied
       'anti_filters': null, // Deselection filters
       'active_filters': {}, // Current object of active filters

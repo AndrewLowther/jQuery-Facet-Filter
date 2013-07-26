@@ -1,6 +1,6 @@
 {
 	"name": "FacetFilter",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A javascript facet filter library",
 	"author": "Andrew Lowther <andrew.lowther@mademedia.co.uk>",
 	"contributors": [{
