@@ -30,8 +30,17 @@ module.exports = function (grunt) {
       files: ['Gruntfile.js', '<%= pkg.scripts.main %>']
     },
     karma: {
-      unit: {
+      options: {
         configFile: 'karma.conf.js'
+      },
+      unit: {
+        browsers: ['Chrome']
+      },
+      // Continuous integration mode: run tests once in PhantomJS browser.
+      continuous: {
+        autoWatch: false,
+        singleRun: true,
+        browsers: ['PhantomJS']
       }
     },
     watch: {
@@ -40,7 +49,13 @@ module.exports = function (grunt) {
     }
 	});
 
-	grunt.registerTask('default', ['jshint', 'uglify']);
+	grunt.registerTask('default', [
+    'jshint',
+    'uglify',
+    'karma:continuous'
+  ]);
+  grunt.registerTask('test', [
+    'karma:unit'
+  ]);
 
-  grunt.registerTask('test', ['karma']);
 };
