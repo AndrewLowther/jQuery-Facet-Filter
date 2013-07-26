@@ -1,6 +1,6 @@
 ;(function ($) {
   'use strict';
-  
+
   $.facetfilter = function( element, options ) {
     var settings, facets, $element, init;
 
@@ -8,7 +8,6 @@
      * Default plugin settings
      */
     settings = {
-      'version': '1.0.3', // Current plugin version
       'filters': null, // Selection of filters that can be applied
       'anti_filters': null, // Deselection filters
       'active_filters': {}, // Current object of active filters
@@ -22,22 +21,25 @@
       'callback': null, // Generic callback
       'type': 'html' // Specify the data type returned
     };
-    
+
     // Set the facet as this
     facets = this;
-    
+
+    // Current plugin version
+    facets.version = '1.0.3';
+
     // Empty settings for now
     facets.settings = {};
-    
+
     $element = $(element), // Our dom reference
       element = element; // The actual dom reference
-    
+
     // Set up the plugin options
     init = function() {
       var key, val;
 
       facets.settings = $.extend({}, settings, options);
-      
+
       $element.on('change', facets.settings.filters, facets.select);
       $element.on('click', facets.settings.anti_filters, facets.deselect);
 
@@ -46,7 +48,7 @@
         facets.addFacet(val.name, val.val);
       }
     };
-    
+
     // Set up a request
     facets.request = function(type) {
       var key, facet_data;
@@ -59,13 +61,13 @@
         } else {
           type = type.toUpperCase();
         }
-        
+
         facet_data = facets.settings.active_filters;
         // Add in options for the ajax request
         for( key in facets.settings.url_options ) {
           facet_data[key] = facets.settings.url_options[key];
         }
-        
+
         $.ajax({
           url: facets.settings.ajax_url,
           type: type,
@@ -77,14 +79,14 @@
         });
       }
     };
-    
+
     // Add a facet to the filters
     facets.addFacet = function(facet, value) {
       if( typeof facets.settings.active_filters[facet] === 'undefined' ) {
         if( value === null ) {
           value = 1;
         }
-        
+
         facets.settings.active_filters[facet] = {};
       }
 
@@ -94,7 +96,7 @@
         facets.settings.active_filters[facet][value] = value;
       }
     };
-    
+
     // Remove facets from the filters
     facets.removeFacet = function(facet, value) {
       var key, facet_count;
@@ -108,47 +110,47 @@
           delete facets.settings.active_filters[facet];
         }
       }
-      
+
       // Check if there are no more facets in the list, remove it completely from the active facets
       facet_count = 0;
       for( key in facets.settings.active_filters[facet] ) {
         facet_count++;
       }
-      
+
       if( facet_count === 0 ) {
         delete facets.settings.active_filters[facet];
       }
-      
+
     };
-    
+
     // Select a facet
     facets.select = function(e) {
       var facet_name;
 
       facet_name = $(this).parent().parent().attr('id');
       facets.addFacet( facet_name, $(this).val() );
-      
+
       if( facets.settings.callback !== null ) {
         facets.settings.callback.apply(facets, ['addFacet', facet_name, $(this).val()]);
       }
-      
+
       facets.request();
     };
-    
+
     // Deselect a facet
     facets.deselect = function(e) {
       var facet_name;
 
       facet_name = $(this).attr('name').replace(/\[(.*)\]/, '');
       facets.removeFacet( facet_name, $(this).val() );
-      
+
       if( facets.settings.callback !== null ) {
         facets.settings.callback.apply(facets, ['removeFacet', facet_name]);
       }
-      
+
       facets.request();
     };
-    
+
     // URI Encode active facets
     facets.serialize = function(obj, prefix) {
       var str, p, k, v;
@@ -204,15 +206,15 @@
         return false;
       }
     };
-    
+
     facets.activeFilters = function() {
       return facets.settings.active_filters;
     };
-    
+
     // Call the init private method
     init();
   };
-  
+
   $.fn.facetfilter = function(options) {
     var facetfilter, ident;
 
@@ -220,10 +222,10 @@
     return this.each(function() {
       if( undefined === $(this).data(ident) ) {
         facetfilter = new $.facetfilter(this, options);
-        
+
         $(this).data(ident, facetfilter);
       }
     });
   };
-  
+
 })(jQuery);

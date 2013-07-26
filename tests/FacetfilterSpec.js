@@ -14,6 +14,9 @@ describe('FacetFilter', function () {
     it('Should have initialized facetfilter', function () {
       expect(facetfilter.data('facetfilter') !== void 0).to.equal(true);
     });
+    it('Should expose version number', function() {
+      expect(facetfilter.data('facetfilter').version).to.exist;
+    });
     it('Should fail on request without ajax url', function () {
       try {
         facetfilter.data('facetfilter').request();
