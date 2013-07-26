@@ -36,7 +36,7 @@ describe('FacetFilter', function () {
       facetfilter.data('facetfilter').settings.active_filters['test'].should.have.property('test');
     });
     it('Should allow arbitrary facet removal', function () {
-      facetfilter.data('facetfilter').removeFacet('test', 'test');
+      facetfilter.data('facetfilter').removeFacet('test');
       expect(facetfilter.data('facetfilter').settings.active_filters['test']).to.equal(void 0);
     });
     it('Should enable serialization of parameters', function () {

@@ -49,7 +49,7 @@
     
     // Set up a request
     facets.request = function(type) {
-      var onsuccess, oncomplete, onerror, key, facet_data;
+      var key, facet_data;
 
       if( !facets.settings.ajax_url ) {
         throw new Error('You must supply an ajax URL, bailing');
@@ -58,18 +58,6 @@
           type = 'GET';
         } else {
           type = type.toUpperCase();
-        }
-        
-        if( facets.settings.onsuccess !== null ) {
-          onsuccess = facets.settings.onsuccess;
-        }
-        
-        if( facets.settings.oncomplete !== null ) {
-          oncomplete = facets.settings.oncomplete;
-        }
-        
-        if( facets.settings.onerror !== null ) {
-          onerror = facets.settings.onerror;
         }
         
         facet_data = facets.settings.active_filters;
@@ -83,9 +71,9 @@
           type: type,
           data: facet_data,
           dataType: facets.settings.type,
-          success: onsuccess,
-          complete: oncomplete,
-          error: onerror
+          success: (facets.settings.onsuccess !== void 0 ? facets.settings.onsuccess : function () {}),
+          complete: (facets.settings.oncomplete !== void 0 ? facets.settings.oncomplete : function () {}),
+          error: (facets.settings.onerror !== void 0 ? facets.settings.onerror : function () {})
         });
       }
     };
@@ -111,7 +99,7 @@
     facets.removeFacet = function(facet, value) {
       var key, facet_count;
 
-      if( value !== null ) {
+      if( value !== void 0 ) {
         if( typeof facets.settings.active_filters[facet][value] !== 'undefined' ) {
           delete facets.settings.active_filters[facet][value];
         }
