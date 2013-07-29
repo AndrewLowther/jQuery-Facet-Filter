@@ -1,0 +1,9 @@
+{
+  "browser": true,
+  "devel": true,
+  "eqeqeq": false,
+  "jquery": true,
+  "smarttabs": true,
+  "undef": true,
+  "unused": false
+}
