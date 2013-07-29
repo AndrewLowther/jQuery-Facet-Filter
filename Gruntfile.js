@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 		uglify: {
 			options: {
         mangle: false,
-				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+				banner: '/*! <%= pkg.name %> - version <%= pkg.version %> */\n'
 			},
 			build: {
         src: '<%= pkg.scripts.main %>',
@@ -25,21 +25,22 @@ module.exports = function (grunt) {
         jquery: true,
         smarttabs: true,
         undef: true,
-        unused: false,
-        globals: {
-          TweenLite: false,
-          Power3: false,
-          Modernizr: false,
-          YT: false,
-          Util: true,
-          App: true
-        }
+        unused: false
       },
       files: ['Gruntfile.js', '<%= pkg.scripts.main %>']
     },
     karma: {
-      unit: {
+      options: {
         configFile: 'karma.conf.js'
+      },
+      unit: {
+        browsers: ['Chrome']
+      },
+      // Continuous integration mode: run tests once in PhantomJS browser.
+      continuous: {
+        autoWatch: false,
+        singleRun: true,
+        browsers: ['PhantomJS']
       }
     },
     watch: {
@@ -48,7 +49,13 @@ module.exports = function (grunt) {
     }
 	});
 
-	grunt.registerTask('default', ['uglify', 'jshint']);
+	grunt.registerTask('default', [
+    'jshint',
+    'uglify',
+    'karma:continuous'
+  ]);
+  grunt.registerTask('test', [
+    'karma:unit'
+  ]);
 
-  grunt.registerTask('test', ['karma']);
 };
