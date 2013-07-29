@@ -10,6 +10,10 @@
 	{
 		"name": "Adam Cross",
 		"email": "adam.cross@mademedia.co.uk"
+	},
+	{
+		"name": "David Rapson",
+		"email": "david.rapson@mademedia.co.uk"
 	}],
 	"devDependencies": {
 		"grunt": "~0.4.0",
@@ -23,7 +27,8 @@
 	},
 	"scripts": {
 		"main": "facetfilter.js",
-		"minified": "facetfilter.min.js"
+		"minified": "facetfilter.min.js",
+		"test": "grunt karma:continuous"
 	},
 	"repository": {
 		"type": "git",
