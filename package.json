@@ -23,7 +23,8 @@
 	},
 	"scripts": {
 		"main": "facetfilter.js",
-		"minified": "facetfilter.min.js"
+		"minified": "facetfilter.min.js",
+		"test": "grunt karma:continuous"
 	},
 	"repository": {
 		"type": "git",
