@@ -26,7 +26,7 @@
     facets = this;
 
     // Current plugin version
-    facets.version = '1.0.3';
+    facets.version = '1.0.4';
 
     // Empty settings for now
     facets.settings = {};
@@ -102,8 +102,10 @@
       var key, facet_count;
 
       if( value !== void 0 ) {
-        if( typeof facets.settings.active_filters[facet][value] !== 'undefined' ) {
+        if( !this.isSingleFilter(facet) && typeof facets.settings.active_filters[facet][value] !== 'undefined' ) {
           delete facets.settings.active_filters[facet][value];
+        } else if( this.isSingleFilter(facet) && typeof facets.settings.active_filters[facet] !== 'undefined' ) {
+          delete facets.settings.active_filters[facet];
         }
       } else {
         if( typeof facets.settings.active_filters[facet] !== 'undefined' ) {
