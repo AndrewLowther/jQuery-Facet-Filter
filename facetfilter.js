@@ -37,7 +37,7 @@
     facets = this;
 
     // Current plugin version
-    facets.version = '1.0.4';
+    facets.version = '1.0.5';
 
     /**
      * Empty settings for now

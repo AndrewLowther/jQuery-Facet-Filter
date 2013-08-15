@@ -1,3 +1,7 @@
+### 1.0.5
+
+Added JSDoc documentation
+
 ### 1.0.4
 
 * Fixed single filter removal, if a value is passed, then the facet would have been treated as a multi filter, however this is now resolved
