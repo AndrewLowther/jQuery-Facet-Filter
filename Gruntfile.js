@@ -19,13 +19,7 @@ module.exports = function (grunt) {
 		},
     jshint: {
       options: {
-        browser: true,
-        devel: true,
-        eqeqeq: false,
-        jquery: true,
-        smarttabs: true,
-        undef: true,
-        unused: false
+        jshintrc: '.jshintrc'
       },
       files: ['Gruntfile.js', '<%= pkg.scripts.main %>']
     },
