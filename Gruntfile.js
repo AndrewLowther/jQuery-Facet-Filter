@@ -37,14 +37,23 @@ module.exports = function (grunt) {
         browsers: ['PhantomJS']
       }
     },
+    shell: {
+      jsdoc: {
+        options: {
+          stdout: true
+        },
+        command: 'jsdoc facetfilter.js --destination docs'
+      }
+    },
     watch: {
       files: ['<%= jshint.files %>'],
-      tasks: ['uglify', 'jshint']
+      tasks: ['uglify', 'jshint', 'jsdoc']
     }
 	});
 
 	grunt.registerTask('default', [
     'jshint',
+    'shell',
     'uglify',
     'karma:continuous'
   ]);

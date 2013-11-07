@@ -1,6 +1,4 @@
-# FacetFilter
-
-[![Build Status](https://travis-ci.org/AndrewLowther/jQuery-Facet-Filter.png)](https://travis-ci.org/AndrewLowther/jQuery-Facet-Filter.png)
+# FacetFilter [![Build Status](https://travis-ci.org/AndrewLowther/jQuery-Facet-Filter.png)](https://travis-ci.org/AndrewLowther/jQuery-Facet-Filter.png)
 
 ## Installation
 
