@@ -152,13 +152,15 @@
      * Select a facet
      */
     facets.select = function(e) {
-      var facet_name;
 
-      facet_name = $(this).parent().parent().attr('id');
-      facets.addFacet( facet_name, $(this).val() );
+      var facetName,
+          $this = $(this);
 
-      if( facets.settings.callback !== null ) {
-        facets.settings.callback.apply(facets, ['addFacet', facet_name, $(this).val()]);
+      facetName = $this.attr('name').replace( /\[(.*)\]/, '' );
+      facets.addFacet( facetName, $this.val() );
+
+      if ( facets.settings.callback && typeof facets.settings.callback === 'function' ) {
+        facets.settings.callback.apply( facets, [ 'addFacet', facetName, $this.val() ] );
       }
 
       facets.request();
@@ -168,13 +170,15 @@
      * Deselect a facet
      */
     facets.deselect = function(e) {
-      var facet_name;
 
-      facet_name = $(this).attr('name').replace(/\[(.*)\]/, '');
-      facets.removeFacet( facet_name, $(this).val() );
+      var facetName,
+          $this = $(this);
 
-      if( facets.settings.callback !== null ) {
-        facets.settings.callback.apply(facets, ['removeFacet', facet_name]);
+      facetName = $this.attr('name').replace( /\[(.*)\]/, '' );
+      facets.removeFacet( facetName, $this.val() );
+
+      if ( facets.settings.callback && typeof facets.settings.callback === 'function' ) {
+        facets.settings.callback.apply( facets, [ 'removeFacet', facetName ] );
       }
 
       facets.request();
