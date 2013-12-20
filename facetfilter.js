@@ -11,7 +11,7 @@
    * $.constructor
    */
   $.facetfilter = function( element, options ) {
-    var settings, facets, $element, init;
+    var settings, facets, $element, init, request_timer;
 
     /**
      * Default plugin settings
@@ -88,15 +88,19 @@
           facet_data[key] = facets.settings.url_options[key];
         }
 
-        $.ajax({
-          url: facets.settings.ajax_url,
-          type: type,
-          data: facet_data,
-          dataType: facets.settings.type,
-          success: (facets.settings.onsuccess !== void 0 ? facets.settings.onsuccess : function () {}),
-          complete: (facets.settings.oncomplete !== void 0 ? facets.settings.oncomplete : function () {}),
-          error: (facets.settings.onerror !== void 0 ? facets.settings.onerror : function () {})
-        });
+        window.clearTimeout(facets.request_timer);
+        facets.request_timer = window.setTimeout(function() {
+          $.ajax({
+            url: facets.settings.ajax_url,
+            type: type,
+            data: facet_data,
+            dataType: facets.settings.type,
+            success: (facets.settings.onsuccess !== void 0 ? facets.settings.onsuccess : function () {}),
+            complete: (facets.settings.oncomplete !== void 0 ? facets.settings.oncomplete : function () {}),
+            error: (facets.settings.onerror !== void 0 ? facets.settings.onerror : function () {})
+          });
+        }, 300);
+        
       }
     };
 
@@ -104,6 +108,7 @@
      * Add a facet to the filters
      */
     facets.addFacet = function(facet, value) {
+
       if( typeof facets.settings.active_filters[facet] === 'undefined' ) {
         if( value === null ) {
           value = 1;
